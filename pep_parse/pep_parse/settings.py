@@ -1,4 +1,4 @@
-from .constants import FEED_URI
+from .constants import results_dir_name
 
 BOT_NAME = 'pep_parse'
 NEWSPIDER_MODULE = 'pep_parse.spiders'
@@ -6,7 +6,7 @@ SPIDER_MODULES = [NEWSPIDER_MODULE]
 ROBOTSTXT_OBEY = True
 
 FEEDS = {
-    FEED_URI: {
+   f'{results_dir_name}/pep_%(time)s.csv': {
         'format': 'csv',
         'fields': ['number', 'name', 'status'],
         'overwrite': True,
