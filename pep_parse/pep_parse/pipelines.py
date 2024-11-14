@@ -9,6 +9,9 @@ from .constants import DATETIME_FORMAT, RESULT_DIR
 
 class PepParsePipeline:
 
+    def __init__(self):
+        RESULT_DIR.mkdir(exist_ok=True)
+
     def open_spider(self, spider):
         self.status_dict = defaultdict(int)
 
