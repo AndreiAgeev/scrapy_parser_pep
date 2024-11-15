@@ -25,8 +25,8 @@ class PepParsePipeline:
         now = datetime.now().strftime(DATETIME_FORMAT)
         filename = f'status_summary_{now}.csv'
         filepath = RESULT_DIR / filename
-        print(filepath)
         with open(filepath, 'w', encoding='utf-8', newline='') as file:
             writer = csv.writer(file, dialect='unix', quoting=csv.QUOTE_NONE)
-            writer.writerow(['Статус', 'Количество'])
-            writer.writerows(self.status_dict.items())
+            writer.writerows(
+                (('Статус', 'Количество'), *self.status_dict.items())
+            )

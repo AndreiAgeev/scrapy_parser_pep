@@ -4,9 +4,20 @@ from pep_parse.items import PepParseItem
 
 
 class PepSpider(scrapy.Spider):
+    '''
+    Паук для парсинга документов PEP.
+
+    status_selector     CSS-селектор для поиска значения статуса в
+                        коде страницы;
+    pep_link_selector   XPath-селектор, для получения ссылок на документы PEP.
+                        Ссылки берутся из таблиц на основной странице.
+                        Т.к. в одной строке таблицы указывается несколько
+                        ссылок на один документ, осуществляется поиск тега
+                        <a>, текст которого содержит только цифры - номер PEP.
+    '''
     name = 'pep'
     allowed_domains = ['peps.python.org']
-    start_urls = ['https://' + domain + '/' for domain in allowed_domains]
+    start_urls = [f'https://{domain}/' for domain in allowed_domains]
     status_selector = 'dt:contains("Status") + dd abbr::text'
     pep_link_selector = (
         '//section[@id="index-by-category"]//'
