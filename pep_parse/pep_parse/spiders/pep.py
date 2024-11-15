@@ -25,7 +25,6 @@ class PepSpider(scrapy.Spider):
     )
 
     def parse(self, response):
-        # Поиск тега <a>, содержащего в теле только цифру
         for link in response.xpath(self.pep_link_selector).getall():
             yield response.follow(link, callback=self.parse_pep)
 
